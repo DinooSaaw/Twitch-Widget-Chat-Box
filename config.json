@@ -1,9 +1,10 @@
 {
     "twitch": {
-      "channel": "",
-      "client_ID": "",
-      "access_token": "",
-      "commandPrefix": ""
+      "channel": "dinoosaaw",
+      "channel_id": "",
+      "client_ID": "xoqw101tcirrskbzn3rpbqt2kdjhu0",
+      "access_token": "g5um0m6djo2cqcrnc6sfksykwjs0xd",
+      "commandPrefix": "!"
     }
   }
   
