@@ -56,7 +56,7 @@ const fetchChannelBadges = async () => {
     return;
   }
 
-  if (!config.twitch.channel_id) {
+  if (!config.twitch.channel_id && config.twitch.channel !== "") {
     try {
       const response = await fetch(`https://api.twitch.tv/helix/users?login=${config.twitch.channel}`, {
         headers: {
@@ -80,6 +80,7 @@ const fetchChannelBadges = async () => {
     return; // If channel_id cannot be fetched, stop further processing
   }
 
+  if (config.twitch.channel_id == "" && config.twitch.channel == "") return;
   try {
     const response = await fetch(
       `https://api.twitch.tv/helix/chat/badges?broadcaster_id=${config.twitch.channel_id}`,
