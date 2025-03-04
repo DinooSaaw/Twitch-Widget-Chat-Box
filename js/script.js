@@ -148,15 +148,10 @@ const fetchSevenTVGlobalEmotes = async () => {
 
     const data = await response.json();
     data.emotes.forEach((emote) => {
-      sevenTVGlobalEmotes[
-        emote.name
-      ] = `https://cdn.7tv.app/emote/${emote.id}/3x.webp`;
+      sevenTVGlobalEmotes[emote.name] = `https://cdn.7tv.app/emote/${emote.id}/3x.webp`;
     });
 
-    localStorage.setItem(
-      "sevenTVGlobalEmotes",
-      JSON.stringify(sevenTVGlobalEmotes)
-    );
+    localStorage.setItem("sevenTVGlobalEmotes", JSON.stringify(sevenTVGlobalEmotes));
     logMessage(
       "FETCH",
       `Loaded ${Object.keys(sevenTVGlobalEmotes).length} 7TV global emotes`
@@ -168,9 +163,7 @@ const fetchSevenTVGlobalEmotes = async () => {
 
 // Fetch 7TV channel emotes
 const fetchSevenTVChannelEmotes = async () => {
-  const cachedChannelEmotes = localStorage.getItem(
-    `sevenTVChannelEmotes_${config.twitch.channel}`
-  );
+  const cachedChannelEmotes = localStorage.getItem(`sevenTVChannelEmotes_${config.twitch.channel}`);
 
   if (cachedChannelEmotes) {
     sevenTVChannelEmotes = JSON.parse(cachedChannelEmotes);
@@ -218,9 +211,7 @@ const fetchSevenTVChannelEmotes = async () => {
     const data = await response.json();
     if (data.emote_set && data.emote_set.emotes) {
       data.emote_set.emotes.forEach((emote) => {
-        sevenTVChannelEmotes[
-          emote.name
-        ] = `https://cdn.7tv.app/emote/${emote.id}/3x.webp`;
+        sevenTVChannelEmotes[emote.name] = `https://cdn.7tv.app/emote/${emote.id}/3x.webp`;
       });
     }
 
@@ -230,9 +221,7 @@ const fetchSevenTVChannelEmotes = async () => {
     );
     logMessage(
       "FETCH",
-      `Loaded ${Object.keys(sevenTVChannelEmotes).length} 7TV emotes for ${
-        config.twitch.channel
-      }`
+      `Loaded ${Object.keys(sevenTVChannelEmotes).length} 7TV emotes for ${config.twitch.channel}`
     );
   } catch (error) {
     console.error("[ERROR] Fetching 7TV channel emotes:", error);
@@ -247,7 +236,6 @@ const replaceEmotes = (message, emotes) => {
   Object.keys(sevenTVGlobalEmotes).forEach((emoteName) => {
     if (message.includes(emoteName)) {
       emoteMap[emoteName] = sevenTVGlobalEmotes[emoteName];
-      logMessage("EMOTE", `Added 7TV global emote: ${emoteName}`);
     }
   });
 
@@ -255,7 +243,6 @@ const replaceEmotes = (message, emotes) => {
   Object.keys(sevenTVChannelEmotes).forEach((emoteName) => {
     if (message.includes(emoteName)) {
       emoteMap[emoteName] = sevenTVChannelEmotes[emoteName];
-      logMessage("EMOTE", `Added 7TV channel emote: ${emoteName}`);
     }
   });
 
@@ -265,12 +252,9 @@ const replaceEmotes = (message, emotes) => {
       emotes[emoteId].forEach((range) => {
         const [start, end] = range.split("-").map(Number);
         const emoteText = message.substring(start, end + 1);
-        emoteMap[emoteText] =
-          `https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/dark/4.0` ||
-          sevenTVGlobalEmotes[emoteText] ||
-          sevenTVChannelEmotes[emoteText];
-        
-        logMessage("EMOTE", `Added Twitch emote: ${emoteText}`);
+        emoteMap[emoteText] = `https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/dark/4.0` ||
+                              sevenTVGlobalEmotes[emoteText] ||
+                              sevenTVChannelEmotes[emoteText];
       });
     });
   }
