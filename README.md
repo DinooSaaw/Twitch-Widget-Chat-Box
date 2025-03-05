@@ -27,12 +27,3 @@ You can customize the chat widget by modifying the following files:
 
 - **`config.json`**: Modify the configuration settings such as the Twitch channel name, roles, and other display preferences.
 - **`style.css`**: Change the visual appearance of the chat box, including font size, colors, and layout.
-
-## Dependencies
-
-The widget requires the following dependencies to be installed:
-
-- **`tmi.js`**: For fetching and handling Twitch chat messages.
-- **CSS & JavaScript**: For customizing the visual appearance and behavior of the widget.
-
-Make sure to install the necessary dependencies using npm or include the necessary files in your project.
