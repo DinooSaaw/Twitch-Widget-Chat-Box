@@ -321,6 +321,16 @@ window.displayMessage = (tags, message) => {
     <div class="chat-text">${emoteMessage}</div>
   `;
 
+  if(tags.warning) {
+    messageContainer.style.backgroundColor = "rgba(255,69,69, 0.6)";
+  }
+  if(tags["first-message"]) {
+    messageContainer.style.backgroundColor = "rgba(100,65,165, 0.6)";
+  }
+  if(tags["returning-message"]) {
+    messageContainer.style.backgroundColor = "rgba(144,213,255, 0.6)";
+  }
+
   chatBox.appendChild(messageContainer);
   chatBox.scrollTop = chatBox.scrollHeight;
 
