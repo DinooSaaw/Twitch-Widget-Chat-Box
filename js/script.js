@@ -247,6 +247,7 @@ const replaceEmotes = (message, emotes) => {
   Object.keys(sevenTVGlobalEmotes).forEach((emoteName) => {
     if (message.includes(emoteName)) {
       emoteMap[emoteName] = sevenTVGlobalEmotes[emoteName];
+      logMessage("EMOTE", `Added 7TV global emote: ${emoteName}`);
     }
   });
 
@@ -254,6 +255,7 @@ const replaceEmotes = (message, emotes) => {
   Object.keys(sevenTVChannelEmotes).forEach((emoteName) => {
     if (message.includes(emoteName)) {
       emoteMap[emoteName] = sevenTVChannelEmotes[emoteName];
+      logMessage("EMOTE", `Added 7TV channel emote: ${emoteName}`);
     }
   });
 
@@ -267,6 +269,8 @@ const replaceEmotes = (message, emotes) => {
           `https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/dark/4.0` ||
           sevenTVGlobalEmotes[emoteText] ||
           sevenTVChannelEmotes[emoteText];
+        
+        logMessage("EMOTE", `Added Twitch emote: ${emoteText}`);
       });
     });
   }
