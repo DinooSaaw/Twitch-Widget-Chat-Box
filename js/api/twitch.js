@@ -20,13 +20,12 @@ const initializeTwitchClient = () => {
     logMessage("Twitch", `Client Connected to "${config.twitch.channel}"!`);
 
     client.on("message", (channel, tags, message, self) => {
-      console.log(`[DEBUG] (twitch.js:22:42) tags`, tags);
-      if (message.startsWith(config.twitch.commandPrefix)) return;
+      if (message.startsWith(config.twitch.commandPrefix)) return logMessage("Twitch", "Ignoring command message");
 
       let displayName = tags["display-name"];
       let badges = tags.badges ? Object.keys(tags.badges) : [];
 
-      console.log(`[${displayName}] ${message} | Badges:`, badges);
+      console.log(`[${displayName}] ${message} | Badges:`, badges, `| Tags:`, tags);
 
       // Pass the badges and message to script.js for display
       displayMessage(tags, message);
