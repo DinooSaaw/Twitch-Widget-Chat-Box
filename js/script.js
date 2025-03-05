@@ -324,12 +324,30 @@ window.displayMessage = (tags, message) => {
   if(tags.warning) {
     messageContainer.style.backgroundColor = "rgba(255,69,69, 0.6)";
   }
-  if(tags["first-message"]) {
+
+  if(tags["first-msg"]) {
     messageContainer.style.backgroundColor = "rgba(100,65,165, 0.6)";
   }
-  if(tags["returning-message"]) {
+
+  if(tags["returning-chatter"]) {
     messageContainer.style.backgroundColor = "rgba(144,213,255, 0.6)";
   }
+
+  if (tags["msg-id"] === "highlighted-message") {
+    // Convert userColor (hex) to RGB
+    let r = parseInt(userColor.substring(1, 3), 16);
+    let g = parseInt(userColor.substring(3, 5), 16);
+    let b = parseInt(userColor.substring(5, 7), 16);
+  
+    // Make the color darker by reducing its RGB values
+    r = Math.floor(r * 0.7); // 70% of the original color (darker)
+    g = Math.floor(g * 0.7);
+    b = Math.floor(b * 0.7);
+  
+    // Apply 60% transparency using RGBA
+    messageContainer.style.backgroundColor = `rgba(${r}, ${g}, ${b}, 0.6)`;
+  }
+  
 
   chatBox.appendChild(messageContainer);
   chatBox.scrollTop = chatBox.scrollHeight;
